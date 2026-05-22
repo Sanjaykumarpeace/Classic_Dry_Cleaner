@@ -3,17 +3,47 @@ import { Star } from "lucide-react";
 import { site } from "./config";
 
 const reviews = [
-  { name: "Priya Sharma", area: "Yelahanka", rating: 5, text: "My silk saree came back looking brand new. The packaging itself feels premium — like an Amazon Luxury order." },
-  { name: "Arjun Reddy", area: "Bagalur", rating: 5, text: "The only place I trust with my suits. Stitching, lining, buttons — everything is handled with care." },
-  { name: "Meera Iyer", area: "Kattigenahalli", rating: 5, text: "Free pickup is a game changer. Quick turnaround and zero compromise on quality. Highly recommended." },
-  { name: "Rohit Nair", area: "Sathanur", rating: 5, text: "Removed a stubborn wine stain from my white shirt that two other dry cleaners had given up on." },
-  { name: "Ananya Gupta", area: "Yelahanka New Town", rating: 5, text: "Their steam finishing is unreal. Crisp shirts every single time. Worth every rupee." },
-  { name: "Karthik M.", area: "Bagalur Cross", rating: 5, text: "Professional, on-time, and genuinely care about the clothes. Best dry cleaner in north Bengaluru." },
+  {
+    name: "Priya Sharma",
+    area: "Yelahanka",
+    rating: 5,
+    text: "My silk saree came back looking brand new. The packaging itself feels premium and carefully done.",
+  },
+  {
+    name: "Arjun Reddy",
+    area: "Bagalur",
+    rating: 5,
+    text: "The only place I trust with my suits. Stitching, lining, buttons - everything is handled with care.",
+  },
+  {
+    name: "Meera Iyer",
+    area: "Kattigenahalli",
+    rating: 5,
+    text: "Free pickup is a game changer. Quick turnaround and zero compromise on quality. Highly recommended.",
+  },
+  {
+    name: "Rohit Nair",
+    area: "Sathanur",
+    rating: 5,
+    text: "Removed a stubborn wine stain from my white shirt that two other dry cleaners had given up on.",
+  },
+  {
+    name: "Ananya Gupta",
+    area: "Yelahanka New Town",
+    rating: 5,
+    text: "Their steam finishing is unreal. Crisp shirts every single time. Worth every rupee.",
+  },
+  {
+    name: "Karthik M.",
+    area: "Bagalur Cross",
+    rating: 5,
+    text: "Professional, on-time, and genuinely careful with the clothes. Best dry cleaner in north Bengaluru.",
+  },
 ];
 
 export function Reviews() {
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
+    <section className="relative overflow-hidden py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-4">
         <Reveal>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -53,7 +83,11 @@ export function Reviews() {
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-charcoal font-display text-sm font-medium text-primary-foreground">
-                    {r.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                    {r.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .slice(0, 2)
+                      .join("")}
                   </div>
                   <div>
                     <div className="text-sm font-semibold">{r.name}</div>

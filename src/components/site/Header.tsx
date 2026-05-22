@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { site } from "./config";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "./BrandLogo";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -13,42 +14,42 @@ const nav = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 12);
+      setHidden(currentY > 160 && currentY > lastY && !open);
+      lastY = currentY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "py-2" : "py-4",
+        scrolled ? "py-2" : "py-4 md:py-5",
+        hidden ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100",
       )}
     >
       <div className="mx-auto max-w-7xl px-4">
         <div
           className={cn(
-            "flex items-center justify-between rounded-full border border-white/10 px-4 py-2.5 transition-all duration-500 md:px-6",
-            scrolled ? "glass-dark shadow-elegant" : "bg-transparent",
+            "flex items-center justify-between gap-3 rounded-full border px-3 py-2 transition-all duration-500 md:px-5",
+            scrolled
+              ? "border-white/15 bg-navy-deep/85 shadow-elegant backdrop-blur-xl"
+              : "border-white/10 bg-navy-deep/20 backdrop-blur-sm",
           )}
         >
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gold-gradient shadow-gold">
-              <span className="font-display text-lg font-semibold text-navy-deep">C</span>
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="font-display text-base font-semibold tracking-wide text-white">
-                Classic
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-white/60">
-                Dry Cleaners
-              </span>
-            </span>
-          </Link>
+          <BrandLogo light compact />
 
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((item) => (
@@ -57,7 +58,7 @@ export function Header() {
                 to={item.to}
                 className="relative rounded-full px-4 py-2 text-sm font-medium text-white/75 transition-colors hover:text-white"
                 activeOptions={{ exact: item.to === "/" }}
-                activeProps={{ className: "text-white" }}
+                activeProps={{ className: "text-white bg-white/10" }}
               >
                 {item.label}
               </Link>
@@ -70,7 +71,7 @@ export function Header() {
               className="flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white"
             >
               <Phone className="h-4 w-4" />
-              <span>{site.phone}</span>
+              <span>{site.phoneDisplay}</span>
             </a>
             <a
               href={site.whatsappHref}
@@ -84,15 +85,16 @@ export function Header() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full p-2 text-white md:hidden"
+            className="rounded-full p-2.5 text-white transition hover:bg-white/10 md:hidden"
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
         {open && (
-          <div className="mt-2 rounded-3xl glass-dark p-5 md:hidden animate-in fade-in slide-in-from-top-2">
+          <div className="mt-2 rounded-3xl glass-dark p-5 shadow-elegant md:hidden animate-in fade-in slide-in-from-top-2">
             <nav className="flex flex-col gap-1">
               {nav.map((item) => (
                 <Link
@@ -110,7 +112,7 @@ export function Header() {
                 href={site.phoneHref}
                 className="rounded-xl border border-white/15 px-4 py-3 text-center text-sm font-medium text-white"
               >
-                Call {site.phone}
+                Call {site.phoneDisplay}
               </a>
               <a
                 href={site.whatsappHref}

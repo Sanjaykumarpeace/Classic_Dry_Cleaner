@@ -94,9 +94,18 @@
   --charcoal: oklch(0.2 0.012 260);
   --silver: oklch(0.78 0.008 260);
 
-  --gradient-luxury: linear-gradient(135deg, oklch(0.16 0.04 265) 0%, oklch(0.24 0.055 265) 60%, oklch(0.32 0.06 275) 100%);
+  --gradient-luxury: linear-gradient(
+    135deg,
+    oklch(0.16 0.04 265) 0%,
+    oklch(0.24 0.055 265) 60%,
+    oklch(0.32 0.06 275) 100%
+  );
   --gradient-gold: linear-gradient(135deg, oklch(0.85 0.08 80) 0%, oklch(0.72 0.1 70) 100%);
-  --gradient-radial-glow: radial-gradient(ellipse at top, oklch(0.32 0.07 275 / 0.5), transparent 60%);
+  --gradient-radial-glow: radial-gradient(
+    ellipse at top,
+    oklch(0.32 0.07 275 / 0.5),
+    transparent 60%
+  );
 
   --shadow-elegant: 0 30px 80px -30px oklch(0.16 0.04 265 / 0.35);
   --shadow-soft: 0 10px 40px -15px oklch(0.16 0.04 265 / 0.18);
@@ -168,9 +177,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, .font-display {
+  h1,
+  h2,
+  h3,
+  .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 }
 
@@ -184,17 +196,27 @@
 }
 
 @layer utilities {
-  .bg-luxury { background-image: var(--gradient-luxury); }
-  .bg-gold-gradient { background-image: var(--gradient-gold); }
+  .bg-luxury {
+    background-image: var(--gradient-luxury);
+  }
+  .bg-gold-gradient {
+    background-image: var(--gradient-gold);
+  }
   .text-gradient-gold {
     background-image: var(--gradient-gold);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  .shadow-elegant { box-shadow: var(--shadow-elegant); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
   .glass {
     background: color-mix(in oklab, white 70%, transparent);
     backdrop-filter: saturate(180%) blur(14px);
@@ -207,7 +229,8 @@
   }
   .noise::before {
     content: "";
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
     opacity: 0.04;
     pointer-events: none;

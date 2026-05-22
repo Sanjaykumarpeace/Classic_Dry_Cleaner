@@ -1,10 +1,10 @@
 import { Reveal } from "./Reveal";
-import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import { site } from "./config";
 
 export function ContactMap() {
   return (
-    <section id="contact" className="relative bg-secondary py-24 md:py-32">
+    <section id="contact" className="relative bg-secondary py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-4">
         <Reveal>
           <div className="max-w-2xl">
@@ -19,13 +19,15 @@ export function ContactMap() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <div className="flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-8 shadow-soft">
+            <div className="flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
               <div className="flex gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Address</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Address
+                  </div>
                   <div className="mt-1 leading-relaxed">{site.address}</div>
                 </div>
               </div>
@@ -34,8 +36,12 @@ export function ContactMap() {
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Call</div>
-                  <a href={site.phoneHref} className="mt-1 block text-lg font-medium">{site.phone}</a>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Call
+                  </div>
+                  <a href={site.phoneHref} className="mt-1 block text-lg font-medium">
+                    {site.phoneDisplay}
+                  </a>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -43,7 +49,9 @@ export function ContactMap() {
                   <Clock className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Hours</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Hours
+                  </div>
                   <div className="mt-1">{site.hours}</div>
                 </div>
               </div>
@@ -74,7 +82,7 @@ export function ContactMap() {
               <iframe
                 title="Classic Dry Cleaners location"
                 src={site.mapsEmbed}
-                className="h-[440px] w-full lg:h-full"
+                className="h-[360px] w-full sm:h-[440px] lg:h-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
